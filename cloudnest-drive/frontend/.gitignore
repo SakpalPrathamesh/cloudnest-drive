@@ -1,0 +1,3 @@
+# Never commit Firebase config with real keys
+# (for now we keep config.js but in production use env vars)
+.DS_Store

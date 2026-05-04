@@ -1,0 +1,327 @@
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: Arial, sans-serif;
+  background: #f8fafc;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Top Bar ── */
+.topbar {
+  height: 60px;
+  background: white;
+  border-bottom: 1px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  gap: 16px;
+  flex-shrink: 0;
+}
+
+.topbar-left  { flex-shrink: 0; }
+.topbar-center { flex: 1; max-width: 500px; }
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.logo {
+  font-size: 18px;
+  font-weight: bold;
+  color: #4f6ee8;
+}
+
+.search-box {
+  width: 100%;
+  padding: 9px 14px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+}
+.search-box:focus { border-color: #4f6ee8; }
+
+.user-name {
+  font-size: 14px;
+  color: #475569;
+  max-width: 160px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.btn-logout {
+  padding: 7px 14px;
+  background: #fef2f2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+  border-radius: 7px;
+  font-size: 13px;
+  cursor: pointer;
+}
+.btn-logout:hover { background: #fee2e2; }
+
+/* ── Layout ── */
+.layout {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* ── Sidebar ── */
+.sidebar {
+  width: 220px;
+  background: white;
+  border-right: 1px solid #e2e8f0;
+  padding: 20px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.upload-btn {
+  padding: 11px;
+  background: #4f6ee8;
+  color: white;
+  border: none;
+  border-radius: 9px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  transition: background 0.2s;
+}
+.upload-btn:hover { background: #3d5bd9; }
+
+.sidebar-nav { display: flex; flex-direction: column; gap: 2px; }
+
+.nav-item {
+  display: block;
+  padding: 9px 12px;
+  border-radius: 8px;
+  color: #475569;
+  font-size: 14px;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+.nav-item.active,
+.nav-item:hover {
+  background: #eff3ff;
+  color: #4f6ee8;
+}
+
+/* ── Main ── */
+.main {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px;
+}
+
+/* ── Upload progress ── */
+.upload-box {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.upload-box span {
+  font-size: 13px;
+  color: #475569;
+}
+
+.progress-bar {
+  height: 6px;
+  background: #e2e8f0;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #4f6ee8;
+  border-radius: 6px;
+  width: 0%;
+  transition: width 0.3s ease;
+}
+
+/* ── Section title ── */
+.section-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 20px;
+}
+
+/* ── Loading / Empty / Error states ── */
+.loading-text {
+  color: #94a3b8;
+  font-size: 14px;
+  padding: 40px 0;
+  text-align: center;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 60px 20px;
+  text-align: center;
+  color: #64748b;
+  font-size: 15px;
+}
+
+.btn-retry {
+  margin-top: 8px;
+  padding: 9px 20px;
+  background: #4f6ee8;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+/* ── File Grid ── */
+.files-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
+}
+
+/* ── File Card ── */
+.file-card {
+  background: white;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: box-shadow 0.2s, border-color 0.2s;
+  cursor: default;
+}
+.file-card:hover {
+  border-color: #c7d2fe;
+  box-shadow: 0 4px 16px rgba(79,110,232,0.08);
+}
+
+.file-icon { font-size: 36px; }
+
+.file-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1e293b;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.file-size {
+  font-size: 11px;
+  color: #94a3b8;
+}
+
+.file-actions {
+  display: flex;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.btn-download, .btn-delete {
+  flex: 1;
+  padding: 7px;
+  border: none;
+  border-radius: 7px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.btn-download {
+  background: #eff3ff;
+  color: #4f6ee8;
+}
+.btn-download:hover { opacity: 0.8; }
+
+.btn-delete {
+  background: #fef2f2;
+  color: #dc2626;
+}
+.btn-delete:hover { opacity: 0.8; }
+
+/* ── Delete Modal ── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  padding: 20px;
+}
+
+.modal {
+  background: white;
+  border-radius: 14px;
+  padding: 28px 24px;
+  max-width: 360px;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.modal h3 { font-size: 18px; color: #1e293b; }
+.modal p  { font-size: 14px; color: #64748b; line-height: 1.5; }
+
+.modal-btns {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.btn-cancel {
+  padding: 10px 20px;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  color: #475569;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.btn-delete-confirm {
+  padding: 10px 20px;
+  background: #dc2626;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+}
+.btn-delete-confirm:hover { background: #b91c1c; }
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .sidebar { display: none; }
+  .files-grid { grid-template-columns: 1fr 1fr; }
+  .topbar-center { display: none; }
+}
